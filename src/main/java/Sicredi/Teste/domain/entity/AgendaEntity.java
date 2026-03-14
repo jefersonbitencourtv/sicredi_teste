@@ -1,9 +1,13 @@
 package Sicredi.Teste.domain.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
+@Getter
 @Entity
-public class Agenda extends BaseEntity{
+@AllArgsConstructor
+public class AgendaEntity extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

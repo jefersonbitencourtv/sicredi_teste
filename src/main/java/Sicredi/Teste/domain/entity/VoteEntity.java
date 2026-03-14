@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import java.util.UUID;
 
 @Entity
-public class Vote extends BaseEntity {
+public class VoteEntity extends BaseEntity {
 
     @Id
     @GeneratedValue
