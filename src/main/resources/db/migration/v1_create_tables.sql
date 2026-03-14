@@ -9,7 +9,6 @@ CREATE TABLE agenda (
 CREATE TABLE voting_session (
     id BIGSERIAL PRIMARY KEY,
     agenda_id BIGINT NOT NULL REFERENCES agenda(id),
-    start_time TIMESTAMP NOT NULL,
     end_time TIMESTAMP NOT NULL,
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP NULL
