@@ -3,6 +3,7 @@ package Sicredi.Teste.domain.entity;
 import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Entity
 public class VotingSessionEntity extends BaseEntity {
@@ -16,9 +17,9 @@ public class VotingSessionEntity extends BaseEntity {
     private AgendaEntity agenda;
 
     @Column(nullable = false)
-    private Instant startTime;
+    private LocalDateTime startTime;
 
     @Column(nullable = false)
-    private Instant endTime;
+    private LocalDateTime endTime;
 
 }
