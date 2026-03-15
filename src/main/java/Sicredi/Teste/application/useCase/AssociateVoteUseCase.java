@@ -2,6 +2,7 @@ package Sicredi.Teste.application.useCase;
 
 import Sicredi.Teste.application.dto.AssociateVoteRequest;
 import Sicredi.Teste.domain.entity.VotingSessionEntity;
+import Sicredi.Teste.domain.exception.VotingSessionIsClosedException;
 import Sicredi.Teste.domain.exception.VotingSessionNotFoundException;
 import Sicredi.Teste.domain.repository.VotingSessionRepository;
 import lombok.AllArgsConstructor;
@@ -16,5 +17,10 @@ public class AssociateVoteUseCase {
     public void execute(AssociateVoteRequest request){
         VotingSessionEntity votingSession = votingSessionRepository.findById(request.votingSessionId())
                 .orElseThrow(()-> new VotingSessionNotFoundException(request.votingSessionId()));
+
+        if (votingSession.isClosed()){
+            throw new VotingSessionIsClosedException(request.votingSessionId());
+        }
+
     }
 }

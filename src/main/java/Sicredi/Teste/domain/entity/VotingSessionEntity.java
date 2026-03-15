@@ -26,6 +26,10 @@ public class VotingSessionEntity extends BaseEntity {
 
     }
 
+    public boolean isClosed(){
+        return endTime.isBefore(LocalDateTime.now());
+    }
+
     private VotingSessionEntity(LocalDateTime endTime, AgendaEntity agenda) {
         this.endTime = endTime;
         this.agenda = agenda;

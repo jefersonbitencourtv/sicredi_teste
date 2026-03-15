@@ -1,12 +1,11 @@
 package Sicredi.Teste.application.useCase;
 
-import Sicredi.Teste.application.dto.CreateAgendaRequest;
 import Sicredi.Teste.application.dto.OpenVotingSessionRequest;
 import Sicredi.Teste.application.dto.OpenVotingSessionResponse;
 import Sicredi.Teste.domain.entity.AgendaEntity;
 import Sicredi.Teste.domain.entity.VotingSessionEntity;
 import Sicredi.Teste.domain.exception.AgendaNotFoundException;
-import Sicredi.Teste.domain.exception.AlreadyExistsOpenVotingSession;
+import Sicredi.Teste.domain.exception.AlreadyExistsOpenVotingSessionException;
 import Sicredi.Teste.domain.repository.AgendaRepository;
 import Sicredi.Teste.domain.repository.VotingSessionRepository;
 import org.junit.jupiter.api.Test;
@@ -53,7 +52,7 @@ public class OpenVotingSessionUseCaseTest {
         when(votingSessionRepository.existsByAgendaIdAndEndTimeAfter(anyLong(), any(LocalDateTime.class))).thenReturn(true);
 
 
-        assertThrows(AlreadyExistsOpenVotingSession.class, () -> openVotingSessionUseCase.execute(request));
+        assertThrows(AlreadyExistsOpenVotingSessionException.class, () -> openVotingSessionUseCase.execute(request));
 
         verify(agendaRepository, times(1)).findAgenda(anyLong());
         verify(votingSessionRepository, times(1)).existsByAgendaIdAndEndTimeAfter(anyLong(), any(LocalDateTime.class));

@@ -3,7 +3,7 @@ package Sicredi.Teste.application.useCase;
 import Sicredi.Teste.application.dto.OpenVotingSessionRequest;
 import Sicredi.Teste.application.dto.OpenVotingSessionResponse;
 import Sicredi.Teste.domain.exception.AgendaNotFoundException;
-import Sicredi.Teste.domain.exception.AlreadyExistsOpenVotingSession;
+import Sicredi.Teste.domain.exception.AlreadyExistsOpenVotingSessionException;
 import Sicredi.Teste.domain.repository.AgendaRepository;
 import Sicredi.Teste.domain.repository.VotingSessionRepository;
 
@@ -29,7 +29,7 @@ public class OpenVotingSessionUseCase {
 
     private void validateIfSessionAlreadyOpen(Long agendaId, LocalDateTime endTime) {
         if (votingSessionRepository.existsByAgendaIdAndEndTimeAfter(agendaId, endTime)) {
-            throw new AlreadyExistsOpenVotingSession(agendaId);
+            throw new AlreadyExistsOpenVotingSessionException(agendaId);
         }
     }
 }
