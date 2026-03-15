@@ -1,6 +1,8 @@
 package Sicredi.Teste.domain.entity;
 
+import Sicredi.Teste.domain.exception.DomainException;
 import Sicredi.Teste.domain.valueObject.VoteType;
+import io.micrometer.common.util.StringUtils;
 import jakarta.persistence.*;
 
 import java.util.UUID;
@@ -22,5 +24,31 @@ public class VoteEntity extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private VoteType voteType;
+
+    private VoteEntity(VotingSessionEntity votingSession, String associateId, VoteType voteType) {
+        this.votingSession = votingSession;
+        this.associateId = associateId;
+        this.voteType = voteType;
+    }
+
+    public VoteEntity() {
+
+    }
+
+    public static VoteEntity createVote(VotingSessionEntity votingSession, String associateId, VoteType voteType) {
+        if(votingSession == null) {
+            throw new DomainException("Voting session is mandatory");
+        }
+
+        if(StringUtils.isBlank(associateId)) {
+            throw new DomainException("Associate id is mandatory");
+        }
+
+        if(voteType == null) {
+            throw new DomainException("Vote type is mandatory");
+        }
+
+        return new VoteEntity(votingSession, associateId, voteType);
+    }
 
 }

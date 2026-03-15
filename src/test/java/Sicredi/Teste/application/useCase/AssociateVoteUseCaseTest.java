@@ -2,9 +2,12 @@ package Sicredi.Teste.application.useCase;
 
 import Sicredi.Teste.application.dto.AssociateVoteRequest;
 import Sicredi.Teste.domain.entity.AgendaEntity;
+import Sicredi.Teste.domain.entity.VoteEntity;
 import Sicredi.Teste.domain.entity.VotingSessionEntity;
+import Sicredi.Teste.domain.exception.AssociateAlreadyVotedInThisVotingSessionException;
 import Sicredi.Teste.domain.exception.VotingSessionIsClosedException;
 import Sicredi.Teste.domain.exception.VotingSessionNotFoundException;
+import Sicredi.Teste.domain.repository.VoteRepository;
 import Sicredi.Teste.domain.repository.VotingSessionRepository;
 import Sicredi.Teste.domain.valueObject.VoteType;
 import org.junit.jupiter.api.Test;
@@ -17,7 +20,6 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
@@ -26,6 +28,9 @@ public class AssociateVoteUseCaseTest {
 
     @Mock
     private VotingSessionRepository votingSessionRepository;
+
+    @Mock
+    private VoteRepository voteRepository;
 
     @InjectMocks
     private AssociateVoteUseCase associateVoteUseCase;
@@ -49,6 +54,19 @@ public class AssociateVoteUseCaseTest {
         when(votingSessionRepository.findById(anyLong())).thenReturn(Optional.of(votingSessionEntity));
 
         assertThrows(VotingSessionIsClosedException.class, () -> associateVoteUseCase.execute(request));
+        verify(votingSessionRepository, times(1)).findById(anyLong());
+    }
+
+    @Test
+    void shouldThrowAssociateAlreadyVotedInThisVotingSession(){
+        AssociateVoteRequest request = new AssociateVoteRequest(1L, "12", VoteType.YES);
+        AgendaEntity agendaEntity = AgendaEntity.createAgenda("title", "description");
+        VotingSessionEntity votingSessionEntity = VotingSessionEntity.createVotingSession(agendaEntity, LocalDateTime.now().plusHours(1));
+        VoteEntity voteEntity = VoteEntity.createVote(votingSessionEntity, "12", VoteType.YES);
+
+        when(votingSessionRepository.findById(anyLong())).thenReturn(Optional.of(votingSessionEntity));
+        when(voteRepository.findByVotingSessionIdAndAssociateId(anyLong(), anyString())).thenReturn(Optional.of(voteEntity));
+        assertThrows(AssociateAlreadyVotedInThisVotingSessionException.class, () -> associateVoteUseCase.execute(request));
         verify(votingSessionRepository, times(1)).findById(anyLong());
     }
 
