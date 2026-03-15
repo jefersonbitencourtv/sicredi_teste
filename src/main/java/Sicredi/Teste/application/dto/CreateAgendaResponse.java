@@ -1,19 +1,8 @@
 package Sicredi.Teste.application.dto;
 
 import Sicredi.Teste.domain.entity.AgendaEntity;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 
-@Getter
-@AllArgsConstructor
-public class CreateAgendaResponse {
-
-    private Long id;
-
-    private String title;
-
-    private String description;
-
+public record CreateAgendaResponse(Long id, String title, String description) {
     public static CreateAgendaResponse fromEntity(AgendaEntity entity) {
         return new CreateAgendaResponse(
                 entity.getId(),
@@ -21,5 +10,4 @@ public class CreateAgendaResponse {
                 entity.getDescription()
         );
     }
-
 }

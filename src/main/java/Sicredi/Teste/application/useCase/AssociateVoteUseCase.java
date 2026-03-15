@@ -14,7 +14,7 @@ public class AssociateVoteUseCase {
 
 
     public void execute(AssociateVoteRequest request){
-        VotingSessionEntity votingSession = votingSessionRepository.findById(request.getSessionId())
-                .orElseThrow(()-> new VotingSessionNotFoundException(request.getSessionId()));
+        VotingSessionEntity votingSession = votingSessionRepository.findById(request.votingSessionId())
+                .orElseThrow(()-> new VotingSessionNotFoundException(request.votingSessionId()));
     }
 }

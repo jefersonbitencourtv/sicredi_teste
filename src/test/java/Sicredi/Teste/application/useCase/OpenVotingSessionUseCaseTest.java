@@ -76,8 +76,8 @@ public class OpenVotingSessionUseCaseTest {
         verify(votingSessionRepository, times(1)).existsByAgendaIdAndEndTimeAfter(anyLong(), any(LocalDateTime.class));
         verify(votingSessionRepository, times(1)).createVotingSession(any(OpenVotingSessionRequest.class));
         assertNotNull(response);
-        assertEquals(agendaEntity.getId(), response.getAgendaId());
-        assertEquals(request.getEndTime(), response.getEndTime());
+        assertEquals(agendaEntity.getId(), response.agendaId());
+        assertEquals(request.endTime(), response.endTime());
     }
 
 

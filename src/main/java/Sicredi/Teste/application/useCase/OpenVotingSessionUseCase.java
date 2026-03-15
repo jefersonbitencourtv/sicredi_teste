@@ -17,10 +17,10 @@ public class OpenVotingSessionUseCase {
 
     public OpenVotingSessionResponse execute(OpenVotingSessionRequest request) {
 
-        agendaRepository.findAgenda(request.getAgendaId())
-                .orElseThrow(() -> new AgendaNotFoundException(request.getAgendaId()));
+        agendaRepository.findAgenda(request.agendaId())
+                .orElseThrow(() -> new AgendaNotFoundException(request.agendaId()));
 
-        validateIfSessionAlreadyOpen(request.getAgendaId(), request.getEndTime());
+        validateIfSessionAlreadyOpen(request.agendaId(), request.endTime());
 
         var entity = votingSessionRepository.createVotingSession(request);
 

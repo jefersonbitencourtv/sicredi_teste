@@ -33,7 +33,7 @@ public class CreateAgendaUseCaseTest {
         CreateAgendaResponse response = createAgendaUseCase.execute(request);
 
         verify(agendaRepository, times(1)).createAgenda(any());
-        assertEquals(request.getTitle(), response.getTitle());
+        assertEquals(request.title(), response.title());
     }
 
 }
