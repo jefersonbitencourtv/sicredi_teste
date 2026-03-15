@@ -1,5 +1,6 @@
 package Sicredi.Teste.application.useCase;
 
+import Sicredi.Teste.application.dto.CreateAgendaRequest;
 import Sicredi.Teste.application.dto.OpenVotingSessionRequest;
 import Sicredi.Teste.application.dto.OpenVotingSessionResponse;
 import Sicredi.Teste.domain.entity.AgendaEntity;
@@ -46,7 +47,7 @@ public class OpenVotingSessionUseCaseTest {
     @Test
     void shouldThrowExceptionWhenExistsOpenSessionForAgenda() {
         OpenVotingSessionRequest request = new OpenVotingSessionRequest(1L, LocalDateTime.now());
-        AgendaEntity agendaEntity = new AgendaEntity(1L, "title", "description");
+        AgendaEntity agendaEntity = AgendaEntity.createAgenda("Title", "Description");
 
         when(agendaRepository.findAgenda(anyLong())).thenReturn(Optional.of(agendaEntity));
         when(votingSessionRepository.existsByAgendaIdAndEndTimeAfter(anyLong(), any(LocalDateTime.class))).thenReturn(true);
@@ -62,8 +63,8 @@ public class OpenVotingSessionUseCaseTest {
     void shouldCreateVotingSession() {
         var now = LocalDateTime.now();
         OpenVotingSessionRequest request = new OpenVotingSessionRequest(1L, now);
-        AgendaEntity agendaEntity = new AgendaEntity(1L, "title", "description");
-        VotingSessionEntity votingSessionEntity = new VotingSessionEntity(1L, agendaEntity, now);
+        AgendaEntity agendaEntity = AgendaEntity.createAgenda("Title", "Description");
+        VotingSessionEntity votingSessionEntity = VotingSessionEntity.createVotingSession(agendaEntity, now);
 
         when(agendaRepository.findAgenda(anyLong())).thenReturn(Optional.of(agendaEntity));
         when(votingSessionRepository.existsByAgendaIdAndEndTimeAfter(anyLong(), any(LocalDateTime.class))).thenReturn(false);

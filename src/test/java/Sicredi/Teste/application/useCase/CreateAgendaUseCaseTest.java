@@ -26,7 +26,7 @@ public class CreateAgendaUseCaseTest {
     @Test
     void shouldCreateAgenda() {
         CreateAgendaRequest request = new CreateAgendaRequest("Title", "Description");
-        AgendaEntity agendaEntity = new AgendaEntity(1L, "Title", "Description");
+        AgendaEntity agendaEntity = AgendaEntity.createAgenda("Title", "Description");
 
         when(agendaRepository.createAgenda(any())).thenReturn(agendaEntity);
 
