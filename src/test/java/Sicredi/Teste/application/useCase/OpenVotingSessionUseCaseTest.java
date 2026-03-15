@@ -49,13 +49,13 @@ public class OpenVotingSessionUseCaseTest {
         AgendaEntity agendaEntity = AgendaEntity.createAgenda("Title", "Description");
 
         when(agendaRepository.findAgenda(anyLong())).thenReturn(Optional.of(agendaEntity));
-        when(votingSessionRepository.existsByAgendaIdAndEndTimeAfter(anyLong(), any(LocalDateTime.class))).thenReturn(true);
+        when(votingSessionRepository.existsByAgendaId(anyLong())).thenReturn(true);
 
 
         assertThrows(AlreadyExistsOpenVotingSessionException.class, () -> openVotingSessionUseCase.execute(request));
 
         verify(agendaRepository, times(1)).findAgenda(anyLong());
-        verify(votingSessionRepository, times(1)).existsByAgendaIdAndEndTimeAfter(anyLong(), any(LocalDateTime.class));
+        verify(votingSessionRepository, times(1)).existsByAgendaId(anyLong());
     }
 
     @Test
@@ -66,13 +66,13 @@ public class OpenVotingSessionUseCaseTest {
         VotingSessionEntity votingSessionEntity = VotingSessionEntity.createVotingSession(agendaEntity, now);
 
         when(agendaRepository.findAgenda(anyLong())).thenReturn(Optional.of(agendaEntity));
-        when(votingSessionRepository.existsByAgendaIdAndEndTimeAfter(anyLong(), any(LocalDateTime.class))).thenReturn(false);
+        when(votingSessionRepository.existsByAgendaId(anyLong())).thenReturn(false);
         when(votingSessionRepository.createVotingSession(any(VotingSessionEntity.class))).thenReturn(votingSessionEntity);
 
         OpenVotingSessionResponse response = openVotingSessionUseCase.execute(request);
 
         verify(agendaRepository, times(1)).findAgenda(anyLong());
-        verify(votingSessionRepository, times(1)).existsByAgendaIdAndEndTimeAfter(anyLong(), any(LocalDateTime.class));
+        verify(votingSessionRepository, times(1)).existsByAgendaId(anyLong());
         verify(votingSessionRepository, times(1)).createVotingSession(any(VotingSessionEntity.class));
         assertNotNull(response);
         assertEquals(agendaEntity.getId(), response.agendaId());

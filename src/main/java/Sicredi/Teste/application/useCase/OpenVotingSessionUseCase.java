@@ -33,7 +33,7 @@ public class OpenVotingSessionUseCase {
     }
 
     private void validateIfSessionAlreadyOpen(Long agendaId) {
-        if (votingSessionRepository.existsByAgendaIdAndEndTimeAfter(agendaId, LocalDateTime.now())) {
+        if (votingSessionRepository.existsByAgendaId(agendaId)) {
             throw new AlreadyExistsOpenVotingSessionException(agendaId);
         }
     }

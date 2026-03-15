@@ -12,6 +12,7 @@ CREATE TABLE voting_session (
     end_time TIMESTAMP NOT NULL,
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP NULL
+    CONSTRAINT uk_vote_session_agenda UNIQUE(session_id, agenda_id)
 );
 
 CREATE EXTENSION IF NOT EXISTS "pgcrypto";

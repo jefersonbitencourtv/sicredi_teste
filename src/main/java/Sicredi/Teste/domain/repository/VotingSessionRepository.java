@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface VotingSessionRepository {
 
-    boolean existsByAgendaIdAndEndTimeAfter(Long agendaId, LocalDateTime endTime);
+    boolean existsByAgendaId(Long agendaId);
 
     VotingSessionEntity createVotingSession(VotingSessionEntity entity);
 
