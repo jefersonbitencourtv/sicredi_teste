@@ -42,7 +42,7 @@ public class VotingSessionEntity extends BaseEntity {
         }
 
         if (endTime == null) {
-            throw new DomainException("EndTime is mandatory");
+            endTime = LocalDateTime.now().plusMinutes(1);
         }
 
         return new VotingSessionEntity(endTime, agenda);

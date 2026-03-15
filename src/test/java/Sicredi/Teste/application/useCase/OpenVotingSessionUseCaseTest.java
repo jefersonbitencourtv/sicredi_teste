@@ -61,22 +61,22 @@ public class OpenVotingSessionUseCaseTest {
     @Test
     void shouldCreateVotingSession() {
         var now = LocalDateTime.now();
-        OpenVotingSessionRequest request = new OpenVotingSessionRequest(1L, now);
+        OpenVotingSessionRequest request = new OpenVotingSessionRequest(1L, null);
         AgendaEntity agendaEntity = AgendaEntity.createAgenda("Title", "Description");
         VotingSessionEntity votingSessionEntity = VotingSessionEntity.createVotingSession(agendaEntity, now);
 
         when(agendaRepository.findAgenda(anyLong())).thenReturn(Optional.of(agendaEntity));
         when(votingSessionRepository.existsByAgendaIdAndEndTimeAfter(anyLong(), any(LocalDateTime.class))).thenReturn(false);
-        when(votingSessionRepository.createVotingSession(any(OpenVotingSessionRequest.class))).thenReturn(votingSessionEntity);
+        when(votingSessionRepository.createVotingSession(any(VotingSessionEntity.class))).thenReturn(votingSessionEntity);
 
         OpenVotingSessionResponse response = openVotingSessionUseCase.execute(request);
 
         verify(agendaRepository, times(1)).findAgenda(anyLong());
         verify(votingSessionRepository, times(1)).existsByAgendaIdAndEndTimeAfter(anyLong(), any(LocalDateTime.class));
-        verify(votingSessionRepository, times(1)).createVotingSession(any(OpenVotingSessionRequest.class));
+        verify(votingSessionRepository, times(1)).createVotingSession(any(VotingSessionEntity.class));
         assertNotNull(response);
         assertEquals(agendaEntity.getId(), response.agendaId());
-        assertEquals(request.endTime(), response.endTime());
+        assertEquals(now, response.endTime());
     }
 
 

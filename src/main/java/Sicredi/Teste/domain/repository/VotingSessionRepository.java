@@ -10,7 +10,7 @@ public interface VotingSessionRepository {
 
     boolean existsByAgendaIdAndEndTimeAfter(Long agendaId, LocalDateTime endTime);
 
-    VotingSessionEntity createVotingSession(OpenVotingSessionRequest openVotingSessionRequest);
+    VotingSessionEntity createVotingSession(VotingSessionEntity entity);
 
     Optional<VotingSessionEntity> findById(Long votingSessionId);
 }

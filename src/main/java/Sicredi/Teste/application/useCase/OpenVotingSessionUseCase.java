@@ -2,13 +2,17 @@ package Sicredi.Teste.application.useCase;
 
 import Sicredi.Teste.application.dto.OpenVotingSessionRequest;
 import Sicredi.Teste.application.dto.OpenVotingSessionResponse;
+import Sicredi.Teste.domain.entity.AgendaEntity;
+import Sicredi.Teste.domain.entity.VotingSessionEntity;
 import Sicredi.Teste.domain.exception.AgendaNotFoundException;
 import Sicredi.Teste.domain.exception.AlreadyExistsOpenVotingSessionException;
 import Sicredi.Teste.domain.repository.AgendaRepository;
 import Sicredi.Teste.domain.repository.VotingSessionRepository;
+import lombok.AllArgsConstructor;
 
 import java.time.LocalDateTime;
 
+@AllArgsConstructor
 public class OpenVotingSessionUseCase {
 
     private AgendaRepository agendaRepository;
@@ -17,18 +21,19 @@ public class OpenVotingSessionUseCase {
 
     public OpenVotingSessionResponse execute(OpenVotingSessionRequest request) {
 
-        agendaRepository.findAgenda(request.agendaId())
+        AgendaEntity agendaEntity = agendaRepository.findAgenda(request.agendaId())
                 .orElseThrow(() -> new AgendaNotFoundException(request.agendaId()));
 
-        validateIfSessionAlreadyOpen(request.agendaId(), request.endTime());
+        validateIfSessionAlreadyOpen(request.agendaId());
 
-        var entity = votingSessionRepository.createVotingSession(request);
+        VotingSessionEntity entity = VotingSessionEntity.createVotingSession(agendaEntity, request.endTime());
+        var entityDB = votingSessionRepository.createVotingSession(entity);
 
-        return OpenVotingSessionResponse.fromEntity(entity);
+        return OpenVotingSessionResponse.fromEntity(entityDB);
     }
 
-    private void validateIfSessionAlreadyOpen(Long agendaId, LocalDateTime endTime) {
-        if (votingSessionRepository.existsByAgendaIdAndEndTimeAfter(agendaId, endTime)) {
+    private void validateIfSessionAlreadyOpen(Long agendaId) {
+        if (votingSessionRepository.existsByAgendaIdAndEndTimeAfter(agendaId, LocalDateTime.now())) {
             throw new AlreadyExistsOpenVotingSessionException(agendaId);
         }
     }
