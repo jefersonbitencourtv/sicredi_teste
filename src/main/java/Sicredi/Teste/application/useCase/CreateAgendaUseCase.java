@@ -14,8 +14,8 @@ public class CreateAgendaUseCase {
     }
 
     public CreateAgendaResponse execute(CreateAgendaRequest createAgendaRequest) {
-
-        AgendaEntity agendaEntity = agendaRepository.createAgenda(createAgendaRequest);
+        AgendaEntity entity = AgendaEntity.createAgenda(createAgendaRequest.title(), createAgendaRequest.description());
+        AgendaEntity agendaEntity = agendaRepository.createAgenda(entity);
         return CreateAgendaResponse.fromEntity(agendaEntity);
 
     }
