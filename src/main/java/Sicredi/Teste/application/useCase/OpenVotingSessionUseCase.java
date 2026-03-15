@@ -22,7 +22,9 @@ public class OpenVotingSessionUseCase {
 
         validateIfSessionAlreadyOpen(request.getAgendaId(), request.getEndTime());
 
-        return null;
+        var entity = votingSessionRepository.createVotingSession(request);
+
+        return OpenVotingSessionResponse.fromEntity(entity);
     }
 
     private void validateIfSessionAlreadyOpen(Long agendaId, LocalDateTime endTime) {

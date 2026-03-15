@@ -1,7 +1,9 @@
 package Sicredi.Teste.application.useCase;
 
 import Sicredi.Teste.application.dto.OpenVotingSessionRequest;
+import Sicredi.Teste.application.dto.OpenVotingSessionResponse;
 import Sicredi.Teste.domain.entity.AgendaEntity;
+import Sicredi.Teste.domain.entity.VotingSessionEntity;
 import Sicredi.Teste.domain.exception.AgendaNotFoundException;
 import Sicredi.Teste.domain.exception.AlreadyExistsOpenVotingSession;
 import Sicredi.Teste.domain.repository.AgendaRepository;
@@ -15,7 +17,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
@@ -54,6 +56,27 @@ public class OpenVotingSessionUseCaseTest {
 
         verify(agendaRepository, times(1)).findAgenda(anyLong());
         verify(votingSessionRepository, times(1)).existsByAgendaIdAndEndTimeAfter(anyLong(), any(LocalDateTime.class));
+    }
+
+    @Test
+    void shouldCreateVotingSession() {
+        var now = LocalDateTime.now();
+        OpenVotingSessionRequest request = new OpenVotingSessionRequest(1L, now);
+        AgendaEntity agendaEntity = new AgendaEntity(1L, "title", "description");
+        VotingSessionEntity votingSessionEntity = new VotingSessionEntity(1L, agendaEntity, now);
+
+        when(agendaRepository.findAgenda(anyLong())).thenReturn(Optional.of(agendaEntity));
+        when(votingSessionRepository.existsByAgendaIdAndEndTimeAfter(anyLong(), any(LocalDateTime.class))).thenReturn(false);
+        when(votingSessionRepository.createVotingSession(any(OpenVotingSessionRequest.class))).thenReturn(votingSessionEntity);
+
+        OpenVotingSessionResponse response = openVotingSessionUseCase.execute(request);
+
+        verify(agendaRepository, times(1)).findAgenda(anyLong());
+        verify(votingSessionRepository, times(1)).existsByAgendaIdAndEndTimeAfter(anyLong(), any(LocalDateTime.class));
+        verify(votingSessionRepository, times(1)).createVotingSession(any(OpenVotingSessionRequest.class));
+        assertNotNull(response);
+        assertEquals(agendaEntity.getId(), response.getAgendaId());
+        assertEquals(request.getEndTime(), response.getEndTime());
     }
 
 

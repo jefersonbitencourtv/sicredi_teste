@@ -1,12 +1,14 @@
 package Sicredi.Teste.domain.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Entity
+@AllArgsConstructor
 public class VotingSessionEntity extends BaseEntity {
 
     @Id
