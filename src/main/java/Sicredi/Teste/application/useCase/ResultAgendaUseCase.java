@@ -1,7 +1,9 @@
 package Sicredi.Teste.application.useCase;
 
 import Sicredi.Teste.application.dto.ResultAgendaRequest;
+import Sicredi.Teste.domain.entity.VotingSessionEntity;
 import Sicredi.Teste.domain.exception.AlreadyExistsOpenVotingSessionException;
+import Sicredi.Teste.domain.exception.VotingSessionNotFoundException;
 import Sicredi.Teste.domain.repository.VotingSessionRepository;
 import lombok.AllArgsConstructor;
 
@@ -11,9 +13,12 @@ public class ResultAgendaUseCase {
     private VotingSessionRepository votingSessionRepository;
 
     void execute(ResultAgendaRequest request){
-        votingSessionRepository.findByAgendaId(request.agendaId())
-                .ifPresent(votingSessionEntity -> {
-                    throw new AlreadyExistsOpenVotingSessionException(request.agendaId());
-                });
+        VotingSessionEntity session = votingSessionRepository
+                .findByAgendaId(request.agendaId())
+                .orElseThrow(() -> new VotingSessionNotFoundException(request.agendaId()));
+
+        if (!session.isClosed()) {
+            throw new AlreadyExistsOpenVotingSessionException(request.agendaId());
+        }
     }
 }

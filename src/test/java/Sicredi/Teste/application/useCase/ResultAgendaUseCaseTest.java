@@ -4,13 +4,13 @@ import Sicredi.Teste.application.dto.ResultAgendaRequest;
 import Sicredi.Teste.domain.entity.AgendaEntity;
 import Sicredi.Teste.domain.entity.VotingSessionEntity;
 import Sicredi.Teste.domain.exception.AlreadyExistsOpenVotingSessionException;
+import Sicredi.Teste.domain.exception.VotingSessionNotFoundException;
 import Sicredi.Teste.domain.repository.VotingSessionRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -28,6 +28,17 @@ public class ResultAgendaUseCaseTest {
 
     @Test
     void shouldThrowVotingSessionIsOpen(){
+        ResultAgendaRequest resultAgendaRequest = new ResultAgendaRequest(1L);
+
+        when(votingSessionRepository.findByAgendaId(anyLong())).thenReturn(Optional.empty());
+
+        assertThrows(VotingSessionNotFoundException.class, () -> resultAgendaUseCase.execute(resultAgendaRequest));
+
+        verify(votingSessionRepository, times(1)).findByAgendaId(anyLong());
+    }
+
+    @Test
+    void shouldThrowVotingSessionNotFound(){
         ResultAgendaRequest resultAgendaRequest = new ResultAgendaRequest(1L);
         AgendaEntity agendaEntity = AgendaEntity.createAgenda("Title", "Description");
         VotingSessionEntity votingSessionEntity = VotingSessionEntity.createVotingSession(agendaEntity, null);
