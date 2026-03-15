@@ -9,7 +9,7 @@ public interface AgendaRepository {
 
     AgendaEntity createAgenda(CreateAgendaRequest createAgendaRequest);
 
-    Optional<AgendaEntity> buscarAgenda(Long id);
+    Optional<AgendaEntity> findAgenda(Long id);
 
 
 }
