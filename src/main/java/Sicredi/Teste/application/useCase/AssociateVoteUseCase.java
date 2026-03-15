@@ -1,6 +1,7 @@
 package Sicredi.Teste.application.useCase;
 
 import Sicredi.Teste.application.dto.AssociateVoteRequest;
+import Sicredi.Teste.domain.entity.VoteEntity;
 import Sicredi.Teste.domain.entity.VotingSessionEntity;
 import Sicredi.Teste.domain.exception.AssociateAlreadyVotedInThisVotingSessionException;
 import Sicredi.Teste.domain.exception.VotingSessionIsClosedException;
@@ -34,5 +35,7 @@ public class AssociateVoteUseCase {
                     );
                 });
 
+        VoteEntity voteEntity = VoteEntity.createVote(votingSession, request.associateId(), request.voteType());
+        voteRepository.createVote(voteEntity);
     }
 }

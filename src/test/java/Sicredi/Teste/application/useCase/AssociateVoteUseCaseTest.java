@@ -22,6 +22,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
 
 @ExtendWith(MockitoExtension.class)
 public class AssociateVoteUseCaseTest {
@@ -68,8 +69,26 @@ public class AssociateVoteUseCaseTest {
         when(voteRepository.findByVotingSessionIdAndAssociateId(anyLong(), anyString())).thenReturn(Optional.of(voteEntity));
         assertThrows(AssociateAlreadyVotedInThisVotingSessionException.class, () -> associateVoteUseCase.execute(request));
         verify(votingSessionRepository, times(1)).findById(anyLong());
+        verify(voteRepository, times(1)).findByVotingSessionIdAndAssociateId(anyLong(), anyString());
+
     }
 
+    @Test
+    void shouldCreateVote(){
+        AssociateVoteRequest request = new AssociateVoteRequest(1L, "12", VoteType.YES);
+        AgendaEntity agendaEntity = AgendaEntity.createAgenda("title", "description");
+        VotingSessionEntity votingSessionEntity = VotingSessionEntity.createVotingSession(agendaEntity, LocalDateTime.now().plusHours(1));
+        VoteEntity voteEntity = VoteEntity.createVote(votingSessionEntity, "12", VoteType.YES);
 
+        when(votingSessionRepository.findById(anyLong())).thenReturn(Optional.of(votingSessionEntity));
+        when(voteRepository.findByVotingSessionIdAndAssociateId(anyLong(), anyString())).thenReturn(Optional.empty());
+        when(voteRepository.createVote(any(VoteEntity.class))).thenReturn(voteEntity);
+
+        associateVoteUseCase.execute(request);
+
+        verify(votingSessionRepository, times(1)).findById(anyLong());
+        verify(voteRepository, times(1)).findByVotingSessionIdAndAssociateId(anyLong(), anyString());
+        verify(voteRepository, times(1)).createVote(any(VoteEntity.class));
+    }
 
 }

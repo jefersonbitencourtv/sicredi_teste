@@ -8,4 +8,5 @@ public interface VoteRepository {
 
     Optional<VoteEntity> findByVotingSessionIdAndAssociateId(Long votingSessionId, String associateId);
 
+    VoteEntity createVote(VoteEntity voteEntity);
 }
