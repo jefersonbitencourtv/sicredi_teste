@@ -12,8 +12,9 @@ public class VoteEntity extends BaseEntity {
     @GeneratedValue
     private UUID id;
 
-    @Column(nullable = false)
-    private Long sessionId;
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(nullable = false)
+    private VotingSessionEntity votingSession;
 
     @Column(nullable = false)
     private String associateId;
