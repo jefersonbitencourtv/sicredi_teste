@@ -13,4 +13,7 @@ public interface VotingSessionRepository {
     VotingSessionEntity createVotingSession(VotingSessionEntity entity);
 
     Optional<VotingSessionEntity> findById(Long votingSessionId);
+
+    Optional<VotingSessionEntity> findByAgendaId(Long agendaId);
+
 }
