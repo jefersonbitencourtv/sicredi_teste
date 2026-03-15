@@ -10,7 +10,9 @@ import Sicredi.Teste.domain.repository.VotingSessionRepository;
 import Sicredi.Teste.domain.valueObject.ResultAgenda;
 import Sicredi.Teste.domain.valueObject.VoteType;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
 
+@Component
 @AllArgsConstructor
 public class ResultAgendaUseCase {
 

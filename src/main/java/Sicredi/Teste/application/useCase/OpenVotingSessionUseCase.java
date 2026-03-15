@@ -9,9 +9,9 @@ import Sicredi.Teste.domain.exception.AlreadyExistsOpenVotingSessionException;
 import Sicredi.Teste.domain.repository.AgendaRepository;
 import Sicredi.Teste.domain.repository.VotingSessionRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
-
+@Component
 @AllArgsConstructor
 public class OpenVotingSessionUseCase {
 

@@ -9,15 +9,15 @@ import Sicredi.Teste.domain.exception.VotingSessionNotFoundException;
 import Sicredi.Teste.domain.repository.VoteRepository;
 import Sicredi.Teste.domain.repository.VotingSessionRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
 
+@Component
 @AllArgsConstructor
 public class AssociateVoteUseCase {
 
     private VotingSessionRepository votingSessionRepository;
 
     private VoteRepository voteRepository;
-
-
 
     public void execute(AssociateVoteRequest request){
         VotingSessionEntity votingSession = votingSessionRepository.findById(request.votingSessionId())

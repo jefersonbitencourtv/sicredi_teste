@@ -4,10 +4,12 @@ import Sicredi.Teste.application.dto.CreateAgendaRequest;
 import Sicredi.Teste.application.dto.CreateAgendaResponse;
 import Sicredi.Teste.domain.entity.AgendaEntity;
 import Sicredi.Teste.domain.repository.AgendaRepository;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CreateAgendaUseCase {
 
-    private AgendaRepository agendaRepository;
+    private final AgendaRepository agendaRepository;
 
     public CreateAgendaUseCase(AgendaRepository agendaRepository) {
         this.agendaRepository = agendaRepository;
