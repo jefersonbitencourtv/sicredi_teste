@@ -45,7 +45,7 @@ class VoteE2ETest extends AbstractE2ETest {
         String body = """
             {
               "voting_session_id": %d,
-              "associate_id": "associate-1",
+              "associate_id": "67908938060",
               "vote_type": "Sim"
             }
             """.formatted(session.getId());
