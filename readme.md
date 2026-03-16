@@ -18,7 +18,7 @@ API disponível em `http://localhost:8080/api/v1`
 ## Swagger
 - Disponivel em `http://localhost:8080/swagger-ui/index.html#/`
 
-## Ambiente Cloud
+## Ambiente Cloud (Em teste)
 - Demora alguns minutos para a aplicação subir pois ela desliga após 15 minutos inativa
 - Disponivel em `https://sicredi-teste.onrender.com/swagger-ui/index.html#/`
 
