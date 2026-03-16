@@ -2,6 +2,16 @@
 
 API de votação de pautas em **Spring Boot**, seguindo Clean Architecture. Permite criar pautas, abrir sessões, receber votos e obter resultados.
 
+## Observações
+- `associate_id` deve ser um CPF válido (11 dígitos numéricos)
+- Tarefa bonus 1, API disponibiliza no heroku está indisponivel.
+
+## Pré-requisitos
+Para rodar a aplicação você precisa ter instalado:
+
+- Java 17
+- Docker
+  
 ## Tecnologias
 - Java 17 / Spring Boot 4
 - PostgreSQL 16
@@ -63,13 +73,3 @@ API disponível em `http://localhost:8080/api/v1`
 
 ## Analise qualidade
 ![Resultados do jacoco](./images/jacoco.png)
-
-## Pré-requisitos
-
-Para rodar a aplicação você precisa ter instalado:
-
-- Java 17
-- Docker
-
-## Observações
-- `associate_id` deve ser um CPF válido (11 dígitos numéricos)
