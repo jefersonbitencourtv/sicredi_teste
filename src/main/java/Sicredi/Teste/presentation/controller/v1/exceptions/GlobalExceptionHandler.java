@@ -103,9 +103,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleValidationException(MethodArgumentNotValidException ex) {
         StringBuilder sb = new StringBuilder();
         for (FieldError fieldError : ex.getBindingResult().getFieldErrors()) {
-            sb.append(fieldError.getField())
-                    .append(": ")
-                    .append(fieldError.getDefaultMessage())
+            sb.append(fieldError.getDefaultMessage())
                     .append("; ");
         }
 
