@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://voting-postgres:5432/voting
+    username: postgres
+    password: postgres
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect

@@ -8,13 +8,14 @@ import jakarta.persistence.*;
 import java.util.UUID;
 
 @Entity
+@Table(name = "vote")
 public class VoteEntity extends BaseEntity {
 
     @Id
     @GeneratedValue
     private UUID id;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(nullable = false)
     private VotingSessionEntity votingSession;
 

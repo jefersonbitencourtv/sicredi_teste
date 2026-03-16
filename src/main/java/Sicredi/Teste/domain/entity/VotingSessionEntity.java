@@ -2,13 +2,13 @@ package Sicredi.Teste.domain.entity;
 
 import Sicredi.Teste.domain.exception.DomainException;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Entity
+@Table(name = "voting_session")
 public class VotingSessionEntity extends BaseEntity {
 
     @Id

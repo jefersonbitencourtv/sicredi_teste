@@ -11,7 +11,7 @@ import java.util.UUID;
 @Repository
 public interface VoteJpaRepository extends JpaRepository<VoteEntity, UUID> {
 
-    Optional<VoteEntity> findByVotingSessionIdAndAssociateId(Long votingSessionId, String associateId);
+    Optional<VoteEntity> findByVotingSession_IdAndAssociateId(Long votingSessionId, String associateId);
 
     long countByVotingSessionIdAndVoteType(Long sessionId, VoteType voteType);
 

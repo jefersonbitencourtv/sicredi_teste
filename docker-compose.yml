@@ -1,0 +1,26 @@
+services:
+
+  voting-postgres:
+    image: postgres:16
+    container_name: voting-postgres
+    environment:
+      POSTGRES_DB: voting
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  voting-api:
+    build: .
+    container_name: voting-api
+    depends_on:
+      - voting-postgres
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+
+volumes:
+  postgres_data:

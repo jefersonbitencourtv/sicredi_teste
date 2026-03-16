@@ -21,7 +21,7 @@ public class VoteRepositoryImpl implements VoteRepository {
             String associateId
     ) {
         return voteJpaRepository
-                .findByVotingSessionIdAndAssociateId(votingSessionId, associateId);
+                .findByVotingSession_IdAndAssociateId(votingSessionId, associateId);
     }
 
     @Override

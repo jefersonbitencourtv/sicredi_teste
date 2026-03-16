@@ -16,7 +16,7 @@ public class VotingSessionRepositoryImpl implements VotingSessionRepository {
 
     @Override
     public boolean existsByAgendaId(Long agendaId) {
-        return jpaRepository.existsByAgendaId(agendaId);
+        return jpaRepository.existsByAgenda_Id(agendaId);
     }
 
     @Override
@@ -31,6 +31,6 @@ public class VotingSessionRepositoryImpl implements VotingSessionRepository {
 
     @Override
     public Optional<VotingSessionEntity> findByAgendaId(Long agendaId) {
-        return jpaRepository.findByAgendaId(agendaId);
+        return jpaRepository.findByAgenda_Id(agendaId);
     }
 }

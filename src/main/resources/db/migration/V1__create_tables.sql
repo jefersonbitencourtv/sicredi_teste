@@ -11,7 +11,7 @@ CREATE TABLE voting_session (
     agenda_id BIGINT NOT NULL REFERENCES agenda(id),
     end_time TIMESTAMP NOT NULL,
     created_at TIMESTAMP NOT NULL,
-    updated_at TIMESTAMP NULL
+    updated_at TIMESTAMP NULL,
     CONSTRAINT uk_vote_session_agenda UNIQUE(agenda_id)
 );
 
@@ -19,13 +19,13 @@ CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 
 CREATE TABLE vote (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    session_id BIGINT NOT NULL REFERENCES voting_session(id),
+    voting_session_id BIGINT NOT NULL REFERENCES voting_session(id),
     associate_id VARCHAR(20) NOT NULL,
     vote_type VARCHAR(3) NOT NULL,
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP NULL,
-    CONSTRAINT uk_vote_session_member UNIQUE(session_id, associate_id)
+    CONSTRAINT uk_vote_session_member UNIQUE(voting_session_id, associate_id)
 );
 
 CREATE INDEX idx_vote_session_vote_type
-    ON vote(session_id, vote_type);
+    ON vote(voting_session_id, vote_type);

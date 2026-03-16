@@ -9,8 +9,8 @@ import java.util.Optional;
 @Repository
 public interface VotingSessionJpaRepository extends JpaRepository<VotingSessionEntity, Long> {
 
-    boolean existsByAgendaId(Long agendaId);
+    boolean existsByAgenda_Id(Long agendaId);
 
-    Optional<VotingSessionEntity> findByAgendaId(Long agendaId);
+    Optional<VotingSessionEntity> findByAgenda_Id(Long agendaId);
 
 }

@@ -8,6 +8,7 @@ import lombok.Getter;
 
 @Getter
 @Entity
+@Table(name = "agenda")
 public class AgendaEntity extends BaseEntity{
 
     @Id
