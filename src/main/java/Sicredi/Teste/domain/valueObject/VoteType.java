@@ -1,5 +1,6 @@
 package Sicredi.Teste.domain.valueObject;
 
+import Sicredi.Teste.domain.exception.VoteTypeInvalidException;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
@@ -23,6 +24,6 @@ public enum VoteType {
                 return vote;
             }
         }
-        throw new IllegalArgumentException("Valor de voto inválido: " + value);
+        throw new VoteTypeInvalidException(value);
     }
 }
