@@ -4,10 +4,12 @@ import Sicredi.Teste.domain.exception.DomainException;
 import Sicredi.Teste.domain.valueObject.VoteType;
 import io.micrometer.common.util.StringUtils;
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.util.UUID;
 
 @Entity
+@Getter
 @Table(name = "vote")
 public class VoteEntity extends BaseEntity {
 

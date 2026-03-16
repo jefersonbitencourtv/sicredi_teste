@@ -1,7 +1,8 @@
-package Sicredi.Teste.application.useCase;
+package Sicredi.Teste.unit.useCase;
 
 import Sicredi.Teste.application.dto.OpenVotingSessionRequest;
 import Sicredi.Teste.application.dto.OpenVotingSessionResponse;
+import Sicredi.Teste.application.useCase.OpenVotingSessionUseCase;
 import Sicredi.Teste.domain.entity.AgendaEntity;
 import Sicredi.Teste.domain.entity.VotingSessionEntity;
 import Sicredi.Teste.domain.exception.AgendaNotFoundException;

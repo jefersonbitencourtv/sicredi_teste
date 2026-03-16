@@ -1,6 +1,7 @@
-package Sicredi.Teste.application.useCase;
+package Sicredi.Teste.unit.useCase;
 
 import Sicredi.Teste.application.dto.AssociateVoteRequest;
+import Sicredi.Teste.application.useCase.AssociateVoteUseCase;
 import Sicredi.Teste.domain.entity.AgendaEntity;
 import Sicredi.Teste.domain.entity.VoteEntity;
 import Sicredi.Teste.domain.entity.VotingSessionEntity;

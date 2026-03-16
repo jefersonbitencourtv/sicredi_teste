@@ -1,7 +1,8 @@
-package Sicredi.Teste.application.useCase;
+package Sicredi.Teste.unit.useCase;
 
 import Sicredi.Teste.application.dto.CreateAgendaRequest;
 import Sicredi.Teste.application.dto.CreateAgendaResponse;
+import Sicredi.Teste.application.useCase.CreateAgendaUseCase;
 import Sicredi.Teste.domain.entity.AgendaEntity;
 import Sicredi.Teste.domain.repository.AgendaRepository;
 import org.junit.jupiter.api.Test;
