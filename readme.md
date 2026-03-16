@@ -54,7 +54,7 @@ API disponível em `http://localhost:8080/api/v1`
 ## Ambiente do Teste de Performance
 
 - Sistema Operacional: Windows 10 Home 64-bit
-- Processador: AMD64 Family 23 Model 113 ~3.6 GHz
+- Processador: AMD Ryzen 5 3600
 - Memória RAM: 16 GB
 - Containers Docker: voting-api + voting-postgres
 - Teste executado com k6 1000 VUs, 10s
