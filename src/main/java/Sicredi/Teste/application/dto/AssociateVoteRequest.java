@@ -1,6 +1,7 @@
 package Sicredi.Teste.application.dto;
 
 import Sicredi.Teste.domain.valueObject.VoteType;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -11,7 +12,8 @@ import tools.jackson.databind.annotation.JsonNaming;
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public record AssociateVoteRequest (
-        @NotNull Long votingSessionId,
+        @Schema(name = "voting_session_id") @NotNull Long votingSessionId,
+        @Schema(name = "associate_id")
         @Pattern(regexp = "\\d+", message = "associateId must contain only numbers")
         @CPF @Size(min = 11, max = 11) @NotBlank String associateId,
-        @NotNull VoteType voteType) {}
+        @Schema(name = "vote_type") @NotNull VoteType voteType) {}
