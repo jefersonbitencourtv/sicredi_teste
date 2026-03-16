@@ -61,10 +61,10 @@ public class AssociateVoteUseCaseTest {
 
     @Test
     void shouldThrowAssociateAlreadyVotedInThisVotingSession(){
-        AssociateVoteRequest request = new AssociateVoteRequest(1L, "12", VoteType.YES);
+        AssociateVoteRequest request = new AssociateVoteRequest(1L, "12456789", VoteType.YES);
         AgendaEntity agendaEntity = AgendaEntity.createAgenda("title", "description");
         VotingSessionEntity votingSessionEntity = VotingSessionEntity.createVotingSession(agendaEntity, LocalDateTime.now().plusHours(1));
-        VoteEntity voteEntity = VoteEntity.createVote(votingSessionEntity, "12", VoteType.YES);
+        VoteEntity voteEntity = VoteEntity.createVote(votingSessionEntity, "12456789", VoteType.YES);
 
         when(votingSessionRepository.findById(anyLong())).thenReturn(Optional.of(votingSessionEntity));
         when(voteRepository.findByVotingSessionIdAndAssociateId(anyLong(), anyString())).thenReturn(Optional.of(voteEntity));

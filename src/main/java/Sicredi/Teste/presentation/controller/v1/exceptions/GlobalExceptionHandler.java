@@ -16,6 +16,8 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(AgendaNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleAgendaNotFound(AgendaNotFoundException ex) {
+        log.error("Exception:{}", ex.getMessage(), ex);
+
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(new ErrorResponse(
                         HttpStatus.NOT_FOUND.value(),
@@ -26,6 +28,8 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(VotingSessionNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleVotingSessionNotFound(VotingSessionNotFoundException ex) {
+        log.error("Exception:{}", ex.getMessage(), ex);
+
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(new ErrorResponse(
                         HttpStatus.NOT_FOUND.value(),
@@ -36,6 +40,8 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(AlreadyExistsOpenVotingSessionException.class)
     public ResponseEntity<ErrorResponse> handleVotingSessionAlreadyExists(AlreadyExistsOpenVotingSessionException ex) {
+        log.error("Exception:{}", ex.getMessage(), ex);
+
         return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(new ErrorResponse(
                         HttpStatus.CONFLICT.value(),
@@ -46,6 +52,8 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(AssociateAlreadyVotedInThisVotingSessionException.class)
     public ResponseEntity<ErrorResponse> handleAssociateAlreadyVoted(AssociateAlreadyVotedInThisVotingSessionException ex) {
+        log.error("Exception:{}", ex.getMessage(), ex);
+
         return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(new ErrorResponse(
                         HttpStatus.CONFLICT.value(),
@@ -56,6 +64,8 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(VotingSessionIsClosedException.class)
     public ResponseEntity<ErrorResponse> handleVotingSessionClosed(VotingSessionIsClosedException ex) {
+        log.error("Exception:{}", ex.getMessage(), ex);
+
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(new ErrorResponse(
                         HttpStatus.BAD_REQUEST.value(),
@@ -66,6 +76,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<ErrorResponse> handleHttpMessageNotReadable(HttpMessageNotReadableException ex) {
+        log.error("Exception:{}", ex.getMessage(), ex);
 
         Throwable cause = ex.getCause();
 
