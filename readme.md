@@ -3,7 +3,7 @@
 API de votação de pautas em **Spring Boot**, seguindo Clean Architecture. Permite criar pautas, abrir sessões, receber votos e obter resultados.
 
 ## Tecnologias
-- Java 17 / Spring Boot 3
+- Java 17 / Spring Boot 4
 - PostgreSQL 16
 - Spring Data JPA / Hibernate
 - Docker / Docker Compose
@@ -54,7 +54,7 @@ API disponível em `http://localhost:8080/api/v1`
 ## Ambiente do Teste de Performance
 
 - Sistema Operacional: Windows 10 Home 64-bit
-- Processador: AMD64 Family 23 Model 113 ~3.6 GHz
+- Processador: AMD Ryzen 5 3600
 - Memória RAM: 16 GB
 - Containers Docker: voting-api + voting-postgres
 - Teste executado com k6 1000 VUs, 10s
@@ -70,7 +70,6 @@ Para rodar a aplicação você precisa ter instalado:
 
 - Java 17
 - Docker
-- Docker Compose
 
 ## Observações
 - `associate_id` deve ser um CPF válido (11 dígitos numéricos)

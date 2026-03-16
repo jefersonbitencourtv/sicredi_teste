@@ -12,8 +12,8 @@ import tools.jackson.databind.annotation.JsonNaming;
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public record AssociateVoteRequest (
-        @Schema(name = "voting_session_id") @NotNull Long votingSessionId,
+        @Schema(name = "voting_session_id") @NotNull(message = "voting_session_id is mandatory") Long votingSessionId,
         @Schema(name = "associate_id")
         @Pattern(regexp = "\\d+", message = "associateId must contain only numbers")
-        @CPF @Size(min = 11, max = 11) @NotBlank String associateId,
-        @Schema(name = "vote_type") @NotNull VoteType voteType) {}
+        @CPF @Size(min = 11, max = 11, message = "Invalid cpf") @NotBlank(message = "associate_id is mandatory and not blank") String associateId,
+        @Schema(name = "vote_type") @NotNull(message = "vote_type is mandatory") VoteType voteType) {}

@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public record OpenVotingSessionRequest(
         @Schema(name = "agenda_id")
-        @NotNull Long agendaId,
+        @NotNull(message = "agenda_id is mandatory") Long agendaId,
         @Schema(name = "end_time", example = "2026-03-16T20:00:00")
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss") LocalDateTime endTime
 ) {}

@@ -7,5 +7,5 @@ import tools.jackson.databind.annotation.JsonNaming;
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public record ResultAgendaRequest(
-        @Schema(name = "agenda_id") @NotNull Long agendaId) {
+        @Schema(name = "agenda_id") @NotNull(message = "agenda_id is mandatory") Long agendaId) {
 }
