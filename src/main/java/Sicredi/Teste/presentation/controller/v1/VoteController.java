@@ -28,6 +28,8 @@ public class VoteController {
 
         associateVoteUseCase.execute(request);
 
+        log.info("Finished process to vote in voting session {}, associate last digits {} and vote type {} "
+                , request.votingSessionId(), lastDigits, request.voteType().getValue());
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

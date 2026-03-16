@@ -27,6 +27,8 @@ public class VotingSessionController {
 
         OpenVotingSessionResponse response = openVotingSessionUseCase.execute(request);
 
+        log.info("Finished process to open session with agenda id {} and endTime {}", request.agendaId(), request.endTime());
+
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 }

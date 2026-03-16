@@ -29,6 +29,8 @@ public class AgendaController {
 
         CreateAgendaResponse response = createAgendaUseCase.execute(request);
 
+        log.info("Finished process to create agenda with title {} and description {}", request.title(), request.description());
+
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
@@ -38,6 +40,7 @@ public class AgendaController {
 
         var response = resultAgendaUseCase.execute(new ResultAgendaRequest(agendaId));
 
+        log.info("Finished process to get agenda with id {}", agendaId);
         return ResponseEntity.ok(response);
     }
 }
