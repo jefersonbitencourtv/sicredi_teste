@@ -10,13 +10,18 @@ API de votação de pautas em **Spring Boot**, seguindo Clean Architecture. Perm
 - k6 para testes de performance
 - JUnit 5 para testes unitários e integrados
 
-## Rodando com Docker
+## Rodando com Docker Localmente
  - docker-compose up --build
 
 API disponível em `http://localhost:8080/api/v1`
 
 ## Swagger
 - Disponivel em `http://localhost:8080/swagger-ui/index.html#/`
+
+## Ambiente Cloud
+- Demora alguns minutos para a aplicação subir pois ela desliga após 15 minutos inativa
+- Disponivel em `https://sicredi-teste.onrender.com/swagger-ui/index.html#/`
+
 
 ## Endpoints
 - **Criar Agenda**: `POST /api/v1/agendas`  
@@ -55,6 +60,9 @@ API disponível em `http://localhost:8080/api/v1`
 - Teste executado com k6 1000 VUs, 10s
 
 ![Resultados do teste de performance](./images/performance.png)
+
+## Analise qualidade
+![Resultados do jacoco](./images/jacoco.png)
 
 ## Pré-requisitos
 
