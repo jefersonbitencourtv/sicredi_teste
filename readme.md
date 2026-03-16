@@ -3,7 +3,7 @@
 API de votação de pautas em **Spring Boot**, seguindo Clean Architecture. Permite criar pautas, abrir sessões, receber votos e obter resultados.
 
 ## Tecnologias
-- Java 17 / Spring Boot 3
+- Java 17 / Spring Boot 4
 - PostgreSQL 16
 - Spring Data JPA / Hibernate
 - Docker / Docker Compose
