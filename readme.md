@@ -70,7 +70,6 @@ Para rodar a aplicação você precisa ter instalado:
 
 - Java 17
 - Docker
-- Docker Compose
 
 ## Observações
 - `associate_id` deve ser um CPF válido (11 dígitos numéricos)
